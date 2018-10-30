@@ -13,6 +13,7 @@ class PJ {
 		this._ins = 0;
 		this._pv = 0;
 		this._def = 0;
+		this._daguante = 4;
 	}
 
 	get nombre() {
@@ -92,9 +93,17 @@ class PJ {
 		this._pv = value;
 	}
 	
+	get daguante() {
+		return this._daguante;
+	}
+	set daguante(value) {
+		this._daguante = value;
+	}
+	
 	genera() {
 		var raza = razas.raza(this._raza);
 		var clase = clases.clase(this._clase);
+		this._daguante = clase.daguante;
 		this._raza = raza.nombre;
 		this._clase = clase.nombre;
 		this._habilidades = habilidades.puntuaciones(this._nivel);

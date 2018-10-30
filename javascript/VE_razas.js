@@ -53,5 +53,6 @@ class Razas {
 	}
 }
 
+
 let razas = new Razas();
 

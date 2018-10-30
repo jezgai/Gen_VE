@@ -7,14 +7,79 @@
 <script src="javascript/VE_clases.js"></script>
 <script src="javascript/VE_pj.js"></script>
 <script>
-	function genera() {
+
+	function seleccionaraza(thelist) {
+		var idx = thelist.selectedIndex;
+		var seleccionado = thelist.options[idx].innerHTML;
+		if ( idx < 1 ) {
+			seleccionado = 'random';
+		}
+		nombreraza = seleccionado;
+	}
+	function seleccionaclase(thelist) {
+		var idx = thelist.selectedIndex;
+		var seleccionado = thelist.options[idx].innerHTML;
+		if ( idx < 1 ) {
+			seleccionado = 'random';
+		}
+		nombreclase = seleccionado;
+	}
+	
+	function seleccionanivel(thelist) {
+		var idx = thelist.selectedIndex;
+		numeronivel = thelist.options[idx].innerHTML;
+	}
+	
+	let nombreraza = "random";
+	let nombreclase = "random";
+	let numeronivel = 1;
+	
+	function cargadesplegable() {
+		document.getElementById("desplegables").innerHTML = "";
+
+		var srazas="<strong>Raza:</strong> <select name='raza' onChange='seleccionaraza(this)'><option>--Aleatorio--</option>"
+		//var srazas="<form action=''><table border='0'><tr><td><select name='rz' onchange='seleccionaraza(this.form)'><option selected value='-1'>--Aleatorio--</option>";
+		for (iraza=0; iraza< razas.razas.length; iraza++) {
+			//srazas += "<option value='" + iraza + "'>" + razas.razas[iraza].nombre + "</option>";
+			srazas += "<option>" + razas.razas[iraza].nombre + "</option>";
+		}
+		srazas += "</select>";
+		
+		var sclases="<strong>Clase:</strong> <select name='clase' onchange='seleccionaclase(this)'><option>--Aleatorio--</option>";
+		//var sclases="<select name='cl' onchange='seleccionaclase(this.form)'><option selected value='-1'>--Aleatorio--</option>";
+		for (iclase=0; iclase< clases.clases.length; iclase++) {
+			//sclases += "<option value='" + iclase + "'>" + clases.clases[iclase].nombre + "</option>";
+			sclases += "<option>" + clases.clases[iclase].nombre + "</option>";
+		}
+		sclases += "</select>";
+		//var snivel="<select name='ni' onchange='seleccionanivel(this.form)'><option selected value='1'>1</option>";
+		var snivel="<strong>Nivel:</strong> <select name='nivel' onchange='seleccionanivel(this)'><option>1</option>";
+		for (inivel=1; inivel< 15; inivel++) {
+			//snivel += "<option value='" + inivel + "'>" + inivel + "</option>";
+			snivel += "<option>" + inivel + "</option>";
+		}
+		//snivel += "</select></td></tr></table></form>";
+		snivel += "</select><button onclick='genera()'>Genera</button>";
+		document.getElementById("desplegables").innerHTML = srazas + sclases + snivel;	
+	}	
+	
+	function vacia() {
 		document.getElementById("datos").innerHTML = "";
 		document.getElementById("rasgos").innerHTML = "";
 		document.getElementById("atributos").innerHTML = "";
 		document.getElementById("talentos").innerHTML = "";
 		document.getElementById("habilidades").innerHTML = "";
+	}
+	
+	function genera() {
+		vacia();
 		
-		let pj = new PJ(1);
+
+		
+		let pj = new PJ(numeronivel);
+		pj.raza = nombreraza;
+		pj.clase = nombreclase;
+		
 		pj.genera();
 		//clase = clases.clase('random');
 		//clase.atq = clase.atq(1);
@@ -37,17 +102,45 @@
 		stals += "</table>";
 		
 		document.getElementById("datos").innerHTML = "<table border='1'><tr><td><strong>Nombre:</strong> " + pj.nombre + "</td><td><strong>Raza:</strong> " + pj.raza + "</td><td><strong>Clase:</strong> " + pj.clase + "</td></tr></table>";
-		document.getElementById("rasgos").innerHTML = "<table border='1'><tr><td><strong>atq:</strong> " + pj.atq + "</td></tr><tr><td><strong>pod:</strong> " + pj.pod + "</td></tr><tr><td><strong>ins:</strong> " + pj.ins + "</td></tr>" +
-		"<tr><td><strong>def:</strong> " + pj.defn + "</td></tr><tr><td><strong>pv:</strong> " + pj.pv + "</td></tr></table";
+		document.getElementById("rasgos").innerHTML = "<table border='1'><tr><td><strong>DA:</strong> d" + pj.daguante +
+													  "</td></tr><tr><td><strong>Atq:</strong> " + pj.atq +
+            		                                  "</td></tr><tr><td><strong>Pod:</strong> " + pj.pod + 
+													  "</td></tr><tr><td><strong>Ins:</strong> " + pj.ins + 
+													  "</td></tr><tr><td><strong>Def:</strong> " + pj.defn + 
+													  "</td></tr><tr><td><strong>PV:</strong> " + pj.pv + "</td></tr></table";
 		document.getElementById("atributos").innerHTML = satrs;
 		document.getElementById("talentos").innerHTML = stals;
 		document.getElementById("habilidades").innerHTML = shabs;
 	}
+	
+	function seleccionajdr(thelist) {
+		vacia();
+		var idx = thelist.selectedIndex;
+		var content = thelist.options[idx].innerHTML;
+		document.getElementById("desplegables").innerHTML = "";
+		if ( idx == 1 ) {
+			cargadesplegable();
+		}
+	}
+	
 </script>
 </head>
-<body>
-	<div style="clear:both"> <button onclick="genera()">Genera</button></div>
-
+<body >
+	<h2>Generador de personajes</h2>
+	<div style="clear:both">
+		<select name="jdr" onChange="seleccionajdr(this)">
+			<option>--Selecciona--</option>
+			<option>Vieja Escuela: Jdr</option>
+			<option>Vieja Escuela: Pulp</option>
+			<option>Vieja Escuela: Cyberpunk</option>
+			<option>Vieja Escuela: Salvaje Oeste</option>
+			<option>Vieja Escuela: Japon</option>
+		</select>
+	</div>
+	<!--<div style="clear:both"> <button onclick="cargadesplegable()">CargaDesplegables</button></div>-->
+	<!--<div style="clear:both"> <button onclick="genera()">Genera</button></div>-->
+	<div id="desplegables"></div>
+	<hr/>
 	<div id="datos"></div>
 	<div style="float:left" id="atributos"></div>
 	<div style="float:left" id="habilidades"></div>
