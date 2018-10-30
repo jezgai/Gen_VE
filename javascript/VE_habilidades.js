@@ -1,64 +1,61 @@
-var ptos_ini = 4;
-var ptos_niv = 2;
-
-var habilidades = [ "Alerta", "Comunicación", "Manipulación", "Erudición", "Subterfugio", "Supervivencia" ];
-
-
-function indiceHabilidad(nbHab) {
-	for (ihb=0; ihb < habilidades.length; ihb++) {
-		if (habilidades[ihb] == nbHab ) {
-			return ihb;
-		}
-	}
-	return -1;
-}
-
-
-function shuffle(array) {
-  var currentIndex = array.length, temporaryValue, randomIndex;
-
-  while (0 !== currentIndex) {
-
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-
-  return array;
-}
-
-
-function puntuaciones(nivel) {
-	phab = [];
-	ptos = []
-	for (ihab = 0; ihab < habilidades.length; ihab++) {
-		if ( ihab < ptos_ini ) {
-			phab.push(1);
-		}
-		else {
-			phab.push(0);
-		}
-		ptos.push(0);
-	}
-	for (iniv = 1; iniv < nivel; iniv++) {
-		phab = shuffle(phab);
-		for (ihab = 0; ihab < ptos_niv; ihab++) {
-			phab[ihab] ++;
-		}
+class Habilidades {
+	constructor() {
+		this._ptos_ini = 4;
+		this._ptos_niv = 2;
+		this._habilidades = [ "Alerta", "Comunicacion", "Manipulacion", "Erudicion", "Subterfugio", "Supervivencia" ];
 	}
 	
-	phab = shuffle(phab);
-	hab = []; 
+	habilidad(nombre) {
+		var ihb=0;
+		for (ihb=0; ihb < this._habilidades.length; ihb++) {
+			if (this._habilidades[ihb] == nombre ) {
+				return ihb;
+			}
+		}
+		return -1;
+		
+	}
 	
-	for (ihab = 0; ihab < habilidades.length; ihab++) {
-		hab.push(habilidades[ihab]);
+	get habilidades() {
+		return this._habilidades;
 	}
-	hab = shuffle(hab);
-	for (ihab = 0; ihab < hab.length; ihab++) {
-		ptos[indiceHabilidad(hab[ihab])] = phab[ihab];
+	
+	puntuaciones(nivel) {
+		var phab = [];
+		var ptos = []
+		var ihab=0;
+		for (ihab = 0; ihab < this._habilidades.length; ihab++) {
+			if ( ihab < this._ptos_ini ) {
+				phab.push(1);
+			}
+			else {
+				phab.push(0);
+			}
+			ptos.push(0);
+		}
+		var iniv=0;
+		for (iniv = 1; iniv < nivel; iniv++) {
+			phab = Comun.shuffle(phab);
+			for (ihab = 0; ihab < this._ptos_niv; ihab++) {
+				phab[ihab] ++;
+			}
+		}
+		
+		phab = Comun.shuffle(phab);
+		var hab = []; 
+		
+		for (ihab = 0; ihab < this._habilidades.length; ihab++) {
+			hab.push(this._habilidades[ihab]);
+		}
+		hab = Comun.shuffle(hab);
+		for (ihab = 0; ihab < hab.length; ihab++) {
+			ptos[this.habilidad(hab[ihab])] = phab[ihab];
+		}
+		return ptos;
 	}
-	return ptos;
 }
+
+
+let habilidades = new Habilidades();
+
+

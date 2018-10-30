@@ -8,9 +8,8 @@
 <script src="javascript/VE_pj.js"></script>
 <script>
 	function genera() {
-		document.getElementById("nombre").innerHTML = "";
-		document.getElementById("raza").innerHTML = "";
-		document.getElementById("clase").innerHTML = "";
+		document.getElementById("datos").innerHTML = "";
+		document.getElementById("rasgos").innerHTML = "";
 		document.getElementById("atributos").innerHTML = "";
 		document.getElementById("talentos").innerHTML = "";
 		document.getElementById("habilidades").innerHTML = "";
@@ -19,24 +18,27 @@
 		pj.genera();
 		//clase = clases.clase('random');
 		//clase.atq = clase.atq(1);
-		var satrs = "";
+		var satrs = "<table border='1'><tr><td><strong>Atributo</strong></td><td><strong>Valor</strong></td><td><strong>Mod</strong><td><strong>Valor</strong></td></td></tr>";
 		for (iatrb = 0; iatrb < pj.atributos.length; iatrb++) {
-			satrs += atributos.atributos[iatrb].nbatr + ": " + pj.atributos[iatrb] + " " + atributos.atributos[iatrb].nbmod + " (" + Atributos.modif(pj.atributos[iatrb]) + ")<br/>";
+			satrs += "<tr><td>" + atributos.atributos[iatrb].nbatr + "</td><td align='center'>" + pj.atributos[iatrb] + "</td><td>" + atributos.atributos[iatrb].nbmod + "</td><td align='center'>" + Atributos.modif(pj.atributos[iatrb]) + "</td></tr>";
 		}
+		satrs += "</table>";
 		//pj.habilidades
-		var shabs = "";
+		var shabs = "<table border='1'><tr><td><strong>Habilidad</strong></td><td><strong>Valor</strong></td></tr>";
 		for (ihabs = 0; ihabs < pj.habilidades.length; ihabs++) {
-			shabs += habilidades.habilidades[ihabs] + ": " + pj.habilidades[ihabs] + "<br/>";
+			shabs += "<tr><td>" + habilidades.habilidades[ihabs] + "</td><td align='center'>" + pj.habilidades[ihabs] + "</td></tr>";
 		}
+		shabs += "</table>";
 		
-		var stals = "";
+		var stals = "<table border='1'><tr><td><strong>Talentos</strong></td></tr>";
 		for (itals = 0; itals < pj.talentos.length; itals++) {
-			stals += pj.talentos[itals] + "<br/>";
+			stals += "<tr><td>" + pj.talentos[itals] + "</td></tr>";
 		}
+		stals += "</table>";
 		
-		document.getElementById("nombre").innerHTML = "<strong>Nombre:</strong> " + pj.nombre;
-		document.getElementById("raza").innerHTML = "<strong>Raza:</strong> " + pj.raza;
-		document.getElementById("clase").innerHTML = "<strong>Clase:</strong> " + pj.clase;
+		document.getElementById("datos").innerHTML = "<table border='1'><tr><td><strong>Nombre:</strong> " + pj.nombre + "</td><td><strong>Raza:</strong> " + pj.raza + "</td><td><strong>Clase:</strong> " + pj.clase + "</td></tr></table>";
+		document.getElementById("rasgos").innerHTML = "<table border='1'><tr><td><strong>atq:</strong> " + pj.atq + "</td></tr><tr><td><strong>pod:</strong> " + pj.pod + "</td></tr><tr><td><strong>ins:</strong> " + pj.ins + "</td></tr>" +
+		"<tr><td><strong>def:</strong> " + pj.defn + "</td></tr><tr><td><strong>pv:</strong> " + pj.pv + "</td></tr></table";
 		document.getElementById("atributos").innerHTML = satrs;
 		document.getElementById("talentos").innerHTML = stals;
 		document.getElementById("habilidades").innerHTML = shabs;
@@ -44,13 +46,12 @@
 </script>
 </head>
 <body>
-	<button onclick="genera()">Genera</button>
+	<div style="clear:both"> <button onclick="genera()">Genera</button></div>
 
-	<p id="nombre"></p>
-	<p id="raza"></p>
-	<p id="clase"></p>
-	<p id="atributos"></p>
-	<p id="habilidades"></p>
-	<p id="talentos"></p>
+	<div id="datos"></div>
+	<div style="float:left" id="atributos"></div>
+	<div style="float:left" id="habilidades"></div>
+	<div style="float:left" id="rasgos"></div>
+	<div id="talentos"></div>
 </body>
 </html>

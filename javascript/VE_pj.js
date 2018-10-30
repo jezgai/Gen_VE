@@ -95,6 +95,8 @@ class PJ {
 	genera() {
 		var raza = razas.raza(this._raza);
 		var clase = clases.clase(this._clase);
+		this._raza = raza.nombre;
+		this._clase = clase.nombre;
 		this._habilidades = habilidades.puntuaciones(this._nivel);
 		this._atributos = atributos.valores(clase.atrs);
 		this._atq = clase.atq(this._nivel);
