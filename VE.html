@@ -1,0 +1,56 @@
+<html>
+<head>
+<script src="javascript/VE_comun.js"></script>
+<script src="javascript/VE_razas.js"></script>
+<script src="javascript/VE_atributos.js"></script>
+<script src="javascript/VE_habilidades.js"></script>
+<script src="javascript/VE_clases.js"></script>
+<script src="javascript/VE_pj.js"></script>
+<script>
+	function genera() {
+		document.getElementById("nombre").innerHTML = "";
+		document.getElementById("raza").innerHTML = "";
+		document.getElementById("clase").innerHTML = "";
+		document.getElementById("atributos").innerHTML = "";
+		document.getElementById("talentos").innerHTML = "";
+		document.getElementById("habilidades").innerHTML = "";
+		
+		let pj = new PJ(1);
+		pj.genera();
+		//clase = clases.clase('random');
+		//clase.atq = clase.atq(1);
+		var satrs = "";
+		for (iatrb = 0; iatrb < pj.atributos.length; iatrb++) {
+			satrs += atributos.atributos[iatrb].nbatr + ": " + pj.atributos[iatrb] + " " + atributos.atributos[iatrb].nbmod + " (" + Atributos.modif(pj.atributos[iatrb]) + ")<br/>";
+		}
+		//pj.habilidades
+		var shabs = "";
+		for (ihabs = 0; ihabs < pj.habilidades.length; ihabs++) {
+			shabs += habilidades.habilidades[ihabs] + ": " + pj.habilidades[ihabs] + "<br/>";
+		}
+		
+		var stals = "";
+		for (itals = 0; itals < pj.talentos.length; itals++) {
+			stals += pj.talentos[itals] + "<br/>";
+		}
+		
+		document.getElementById("nombre").innerHTML = "<strong>Nombre:</strong> " + pj.nombre;
+		document.getElementById("raza").innerHTML = "<strong>Raza:</strong> " + pj.raza;
+		document.getElementById("clase").innerHTML = "<strong>Clase:</strong> " + pj.clase;
+		document.getElementById("atributos").innerHTML = satrs;
+		document.getElementById("talentos").innerHTML = stals;
+		document.getElementById("habilidades").innerHTML = shabs;
+	}
+</script>
+</head>
+<body>
+	<button onclick="genera()">Genera</button>
+
+	<p id="nombre"></p>
+	<p id="raza"></p>
+	<p id="clase"></p>
+	<p id="atributos"></p>
+	<p id="habilidades"></p>
+	<p id="talentos"></p>
+</body>
+</html>
