@@ -101,6 +101,8 @@ class PJ {
 	}
 	
 	genera() {
+		atributos.ntiradasextras = 0;
+		atributos.excesoatributos = 1;
 		var raza = razas.raza(this._raza);
 		var clase = clases.clase(this._clase);
 		this._daguante = clase.daguante;

@@ -1,4 +1,4 @@
-class PJ {
+class PJP {
 
 	constructor(nivel) {
 		this._nombre = '';
@@ -93,15 +93,17 @@ class PJ {
 	}
 	
 	genera() {
+		atributos.ntiradasextras = 1;
+		atributos.excesoatributos = 0;
 		var clase = clasesP.clase(this._clase);
 		this._daguante = clase.daguante;
 		this._clase = clase.nombre;
 		this._habilidades = habilidades.puntuaciones(this._nivel);
-		this._atributos = atributosP.valores(clase.atrs);
+		this._atributos = atributos.valores(clase.atrs);
 		this._atq = clase.atq(this._nivel);
 		this._ins = clase.ins(this._nivel);
 		this._pP = clase.pP(this._nivel); // + AtributosP.modif(this._atributos[atributosP.atributoMod("INT")]);
-		this._defn = 10 + AtributosP.modif(this._atributos[atributosP.atributoMod("DES")]);
+		this._defn = 10 + Atributos.modif(this._atributos[atributos.atributoMod("DES")]);
 		this._pv = clase.pv(this._nivel);
 		//this._nombre = raza.nombrepj();
 		this._talentos = [];

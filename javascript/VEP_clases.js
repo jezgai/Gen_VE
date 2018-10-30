@@ -97,7 +97,7 @@ class ClaseP {
 		if ( nivel > this._ins.length ) {
 			iins = this._ins.length - 1;
 		}
-		return this._pod[iins];
+		return this._ins[iins];
 	}
 
 }

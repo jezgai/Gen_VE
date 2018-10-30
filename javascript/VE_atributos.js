@@ -17,6 +17,34 @@ class Atributos {
 		]
 	}
 	
+	get dado() {
+		return this._dado;
+	}
+	set dado(value) {
+		this._dado = value;
+	}
+	
+	get ntiradas() {
+		return this._ntiradas;
+	}
+	set ntiradas(value) {
+		this._ntiradas = value;
+	}
+	
+	get ntiradasextras() {
+		return this._ntiradasextras;
+	}
+	set ntiradasextras(value) {
+		this._ntiradasextras = value;
+	}
+	
+	get excesoatributos() {
+		return this._excesoatributos;
+	}
+	set excesoatributos(value) {
+		this._excesoatributos = value;
+	}
+	
 	get atributos() {
 		return this._atributos;
 	}
